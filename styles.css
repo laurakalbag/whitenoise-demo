@@ -1,0 +1,477 @@
+/* -- CSS reset
+-------------------------------------------------------------------- */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  position: relative;
+}
+
+html {
+  font-size: 100%; /* all font sizes and rems scale from here */
+}
+
+/* Set core body defaults */
+body {
+  font-family: sans-serif;
+  font-size: 1rem;
+  font-synthesis: none;
+  line-height: 1.35;
+  margin: 0;
+  min-height: 100vh;
+  padding: 1em;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+}
+
+/* Natural flow and rhythm by default */
+main > * + * {
+  margin: 0;
+  margin-top: 2.7em;
+  margin-bottom: 1.35em;
+}
+
+/* Remove list styles on ul, ol elements with a class attribute */
+ul[class],
+ol[class] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* A elements that don't have a class get default styles */
+a {
+  text-decoration-skip-ink: auto;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 0.06em;
+  font-variation-settings: 'wght' 600;
+}
+
+/* Make media easier to work with */
+img,
+picture,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  color: inherit;
+  font: inherit;
+  border: inherit;
+  padding: inherit;
+}
+
+/* Style focus for people using keyboard navigation */
+:focus {
+  outline: 0.1rem solid blue;
+  box-shadow: 0 0 0.2rem blue;
+}
+
+/* Remove all animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  /* hide everything that’s not in the main body of the site */
+  body > *:not(main) {
+    display: none;
+  }
+}
+
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden !important;
+}
+
+/* -- Variables
+-------------------------------------------------------------------- */
+
+:root {
+  --gradient-radial: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.1) 35%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+
+  --background: white;
+  --text: #2b2c38;
+  --gradient-green: linear-gradient(70deg, #00b75f, #38cfab, #8bd970, #01b760);
+  --gradient-yellow: linear-gradient(70deg, #ffe600, #ffe073, #ffc803, #ffe601);
+  --gradient-blue: linear-gradient(70deg, #00e0ff, #73eeff, #0377ff, #01e1ff);
+  --noisemaker-background: #c0c0c0;
+  --noisemaker-background-yellow: var(--gradient-yellow);
+  --noisemaker-background-green: var(--gradient-green);
+  --noisemaker-background-blue: var(--gradient-blue);
+  --border: #8d8d8d;
+  --border-green: #019267;
+  --border-yellow: #cea100;
+  --border-blue: #0080b5;
+  --button-icon: #4d4d4d;
+  --icon-green: #01805a;
+  --icon-yellow: #675100;
+  --icon-blue: #005b81;
+  --buttons-background: #d9d9d9;
+  --button-background: white;
+  --button-border: white;
+  --button-hover: #e6e6e6;
+  --button-active: #cccccc;
+  --button-text: #666666;
+  --text-yellow: #5f4300;
+  --text-green: #005e3b;
+  --text-blue: #003c61;
+  --button-text-yellow: #9b7900;
+  --button-text-green: #019267;
+  --button-text-blue: #0080b5;
+  --box-shadow: #4d4d4d;
+  --box-shadow-dark: #4d4d4d;
+  --box-shadow-green: #8bd970;
+  --box-shadow-yellow: #ffe073;
+  --box-shadow-blue: #73eeff;
+  --glow: transparent;
+  --glow-green: rgb(162, 255, 157, 0.1);
+  --glow-yellow: rgba(255, 239, 175, 0.2);
+  --glow-blue: rgba(146, 248, 255, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #15151e;
+    --text: white;
+    --noisemaker-background: #3c3c4a;
+    --border: #4e4f5f;
+    --border-green: #019267;
+    --border-yellow: #cea100;
+    --border-blue: #0080b5;
+    --button-icon: #ced1da;
+    --icon-green: #8bd970;
+    --icon-yellow: #ffe073;
+    --icon-blue: #73eeff;
+    --buttons-background: #4e4f5f;
+    --button-background: #2b2c38;
+    --button-border: #2b2c38;
+    --button-hover: #3d3e4b;
+    --button-active: #4e4f5f;
+    --button-text: #ffffff;
+    --button-text-yellow: #ffe073;
+    --button-text-green: #8bd970;
+    --button-text-blue: #73eeff;
+    --box-shadow: #4e4f5f;
+    --box-shadow-dark: #2b2c38;
+    --box-shadow-green: #005e3b;
+    --box-shadow-yellow: #5f4300;
+    --box-shadow-blue: #003c61;
+  }
+}
+
+body:has(#noise-maker.yellow) {
+  --background: var(--gradient-yellow);
+  --text: var(--text-yellow);
+}
+
+#noise-maker.yellow {
+  --background: var(--gradient-yellow);
+  --noisemaker-background: var(--noisemaker-background-yellow);
+  --border: var(--border-yellow);
+  --box-shadow: var(--box-shadow-yellow);
+  --button-icon: var(--icon-yellow);
+  --button-text: var(--button-text-yellow);
+  --glow: var(--glow-yellow);
+}
+
+body:has(#noise-maker.green) {
+  --background: var(--gradient-green);
+  --text: var(--text-green);
+}
+
+#noise-maker.green {
+  --background: var(--gradient-green);
+  --noisemaker-background: var(--noisemaker-background-green);
+  --border: var(--border-green);
+  --box-shadow: var(--box-shadow-green);
+  --button-icon: var(--icon-green);
+  --button-text: var(--button-text-green);
+  --glow: var(--glow-green);
+}
+
+body:has(#noise-maker.blue) {
+  --background: var(--gradient-blue);
+  --text: var(--text-blue);
+}
+
+#noise-maker.blue {
+  --background: var(--gradient-blue);
+  --noisemaker-background: var(--noisemaker-background-blue);
+  --border: var(--border-blue);
+  --box-shadow: var(--box-shadow-blue);
+  --button-icon: var(--icon-blue);
+  --button-text: var(--button-text-blue);
+  --glow: var(--glow-blue);
+}
+
+@keyframes animate-gradient {
+  0% {
+    background-position: 0% 13%;
+  }
+  50% {
+    background-position: 100% 88%;
+  }
+  100% {
+    background-position: 0% 13%;
+  }
+}
+
+@keyframes breathe {
+  0% {
+    box-shadow: 0 0 1vw 0.5vw var(--glow), 0 0 1vw 1vw var(--glow),
+      0 0 1vw 1.5vw var(--glow), 0 0 1vw 2vw var(--glow);
+  }
+  50% {
+    box-shadow: 0 0 1vw 8vw var(--glow), 0 0 1vw 12vw var(--glow),
+      0 0 1vw 16vw var(--glow), 0 0 1vw 20vw var(--glow);
+  }
+  100% {
+    box-shadow: 0 0 1vw 0.5vw var(--glow), 0 0 1vw 1vw var(--glow),
+      0 0 1vw 1.5vw var(--glow), 0 0 1vw 2vw var(--glow);
+  }
+}
+
+/* -- Element styles
+-------------------------------------------------------------------- */
+
+body {
+  background: var(--background);
+  color: var(--text);
+}
+
+h1 {
+  flex: 1 1 100%;
+  text-align: center;
+}
+
+h1,
+h2,
+h3,
+ul {
+  z-index: 2;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+h2.button-text {
+  color: var(--button-text);
+  font-size: 0.75rem;
+  text-align: center;
+  margin: 0 0 0.2rem 0;
+  text-transform: uppercase;
+}
+
+button {
+  background-color: var(--button-background);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+  border-radius: 50%;
+  border-color: var(--button-border);
+  border-width: 0.2rem;
+  border-style: outset;
+  margin-top: 0.2rem;
+  padding: 0.75rem 0.75rem;
+}
+
+button:hover {
+  background-color: var(--button-hover);
+}
+
+button:active {
+  background-color: var(--button-active);
+  border-style: inset;
+}
+
+button svg {
+  color: var(--button-icon);
+  display: block;
+  height: 2rem;
+  width: 2rem;
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: auto;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+/* -- And the rest
+-------------------------------------------------------------------- */
+
+#app {
+  animation: animate-gradient 30s ease infinite;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: stretch;
+  align-items: flex-start;
+}
+
+.state-list-label,
+[data-states],
+.context-list-label,
+[data-context] {
+  font-family: monospace;
+  list-style-type: none;
+  margin: 0 auto;
+  max-width: 70ch;
+  padding: 0;
+}
+
+.context-list-label {
+  margin-top: 1.5rem;
+}
+
+[data-states] li,
+[data-context] li {
+  margin-bottom: 0.5rem;
+}
+
+#noise-maker {
+  animation: breathe 10s ease-in-out infinite;
+  background: var(--noisemaker-background);
+  border: 0.15rem solid var(--border);
+  border-radius: 3rem;
+  box-shadow: 0 0 0.15rem var(--border), 0 1rem 2.5rem var(--box-shadow),
+    inset 0 -0.25rem 2rem var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+}
+
+@media (min-width: 35rem) {
+  #noise-maker {
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    max-height: 70vh;
+    padding: 10vh;
+    width: 70vh;
+  }
+}
+
+#buttons {
+  background: var(--buttons-background);
+  border-radius: 2rem;
+  box-shadow: var(--box-shadow-dark) 0 0 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 0;
+  align-content: center;
+  justify-content: center;
+  list-style-type: none;
+  padding: 1rem;
+}
+
+@media (min-width: 35rem) {
+  #buttons {
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    padding: 0.1rem 1rem 1rem 1rem;
+  }
+}
+
+#buttons li {
+  min-width: 7rem;
+}
+
+#buttons li:has(button[disabled]) {
+  display: none;
+}
+
+#buttons li button {
+  display: block;
+  margin: 0 auto;
+}
+
+#info {
+  margin-top: 0;
+  max-width: 33ch;
+}
+
+/* -- Colours
+-------------------------------------------------------------------- */
+
+body:has(#noise-maker.yellow),
+#noise-maker.yellow,
+body:has(#noise-maker.green),
+#noise-maker.green,
+body:has(#noise-maker.blue),
+#noise-maker.blue {
+  background-size: 800% 800%;
+}
+
+body:has(#noise-maker.yellow):after,
+body:has(#noise-maker.green):after,
+body:has(#noise-maker.blue):after {
+  animation: animate-gradient 60s ease infinite;
+  background: var(--gradient-radial);
+  background-size: 800% 800%;
+  content: '';
+  display: block;
+  height: 100%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+#noise-maker.yellow:after,
+#noise-maker.green:after,
+#noise-maker.blue:after {
+  animation: animate-gradient 60s ease infinite;
+  background: var(--gradient-radial);
+  background-size: 800% 800%;
+  border-radius: 50%;
+  content: '';
+  display: block;
+  height: 100%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+#noise-maker * {
+  z-index: 2;
+}

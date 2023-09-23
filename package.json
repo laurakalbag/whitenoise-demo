@@ -1,0 +1,9 @@
+{
+  "name": "xphhcl--run",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "xstate": "5.0.0-beta.29",
+    "vite": "4.4.9"
+  }
+}
