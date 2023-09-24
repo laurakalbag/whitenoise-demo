@@ -125,6 +125,8 @@ function updateIcons(state) {
   lightIcon(state);
 }
 
+// Light colour
+
 function setLightColour(colour) {
   if (colour === "none") {
     document.querySelector("#noise-maker").className = "";
@@ -132,6 +134,8 @@ function setLightColour(colour) {
     document.querySelector("#noise-maker").className = colour;
   }
 }
+
+// Sound
 
 function updateSource(soundTrack) {
   const existingSource = document.querySelector("source");
@@ -159,6 +163,8 @@ function changeTrack(soundTrack) {
     soundIcon(sound);
   }
 }
+
+// Display states and context
 
 function updateDisplayedStates(state) {
   const stateAsList = stateToList(state);
@@ -194,9 +200,10 @@ function contextToList(state) {
 
 function updateDisplayedContext(state) {
   const contextAsList = contextToList(state);
-  // Display current state
   document.querySelector("[data-context]").replaceWith(contextAsList);
 }
+
+// Provide machine implementations
 
 const noiseMaker = createActor(
   machine.provide({
