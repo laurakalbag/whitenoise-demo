@@ -61,6 +61,8 @@ const soundButton = document.querySelector("#button-sound");
 const volUpButton = document.querySelector("#button-vol-up");
 const volDownButton = document.querySelector("#button-vol-down");
 
+const audioUrlPrefix =
+  "https://ascelcgzufjyvdzuplwo.supabase.co/storage/v1/object/public/demo-assets/laura/";
 const noiseTrack = "noise.mp3";
 const wavesTrack = "waves.mp3";
 const fanTrack = "fan.mp3";
@@ -138,15 +140,10 @@ function setLightColour(colour) {
 // Sound
 
 function updateSource(soundTrack) {
-  const existingSource = document.querySelector("source");
-  if (existingSource != null) {
-    existingSource.remove();
-  }
-  let source;
-  source = document.createElement("source");
-  source.type = "audio/mpeg";
-  source.src = soundTrack;
-  audio.prepend(source);
+  const audioPlayer = document.querySelector("#audio-player");
+  audioPlayer.src = `${audioUrlPrefix}/${soundTrack}`;
+  audioPlayer.load();
+  audioPlayer.play();
 }
 
 function changeTrack(soundTrack) {
