@@ -82,6 +82,9 @@ export const machine = createMachine(
           },
           Light: {
             initial: "Light off",
+            exit: {
+              type: "removeColour",
+            },
             states: {
               "Light off": {
                 entry: {
