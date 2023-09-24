@@ -47,7 +47,7 @@ document.querySelector("#app").innerHTML = `
     </li>
   </ul>
 </div>
-<audio id="audio-player" loop>
+<audio id="audio-player" loop preload>
   <p>
     Sorry your browser does not support the audio player.
   </p>
