@@ -1,79 +1,79 @@
-import { createMachine, sendTo, assign, fromCallback } from 'xstate';
+import { createMachine, sendTo, assign, fromCallback } from "xstate";
 
 export const machine = createMachine(
   {
     context: {
       volume: 5,
     },
-    id: 'White noise machine',
-    initial: 'Power off',
+    id: "White noise machine",
+    initial: "Power off",
     states: {
-      'Power off': {
+      "Power off": {
         description:
-          'We need power states because \n\nbrowsers don’t like autoplaying audio.',
+          "We need power states because \n\nbrowsers don’t like autoplaying audio.",
         entry: {
-          type: 'hideButtons',
+          type: "hideButtons",
         },
         on: {
-          'toggle power': {
-            target: 'Power on',
+          "toggle power": {
+            target: "Power on",
             reenter: false,
           },
         },
       },
-      'Power on': {
+      "Power on": {
         entry: [
           {
-            type: 'showButtons',
+            type: "showButtons",
           },
           {
-            type: 'setVolume',
+            type: "setVolume",
           },
-          sendTo('audioPlayer', { type: 'play' }),
+          sendTo("audioPlayer", { type: "play" }),
         ],
         exit: [
           {
-            type: 'hideButtons',
+            type: "hideButtons",
           },
-          sendTo('audioPlayer', { type: 'pause' }),
+          sendTo("audioPlayer", { type: "pause" }),
         ],
         invoke: {
-          src: 'audioPlayer',
-          id: 'audioPlayer',
+          src: "audioPlayer",
+          id: "audioPlayer",
         },
         states: {
           Sound: {
-            initial: 'White noise',
+            initial: "White noise",
             states: {
-              'White noise': {
+              "White noise": {
                 entry: {
-                  type: 'changeToNoise',
+                  type: "changeToNoise",
                 },
                 on: {
-                  'toggle sound': {
-                    target: 'Waves',
+                  "toggle sound": {
+                    target: "Waves",
                     reenter: false,
                   },
                 },
               },
               Waves: {
                 entry: {
-                  type: 'changeToWaves',
+                  type: "changeToWaves",
                 },
                 on: {
-                  'toggle sound': {
-                    target: 'Fan',
+                  "toggle sound": {
+                    target: "Fan",
                     reenter: false,
                   },
                 },
               },
               Fan: {
                 entry: {
-                  type: 'changeToFan',
+                  type: "changeToFan",
                 },
                 on: {
-                  'toggle sound': {
-                    target: 'White noise',
+                  "toggle sound": {
+                    target: "White noise",
                     reenter: false,
                   },
                 },
@@ -81,48 +81,48 @@ export const machine = createMachine(
             },
           },
           Light: {
-            initial: 'Light off',
+            initial: "Light off",
             states: {
-              'Light off': {
+              "Light off": {
                 entry: {
-                  type: 'removeColour',
+                  type: "removeColour",
                 },
                 on: {
-                  'toggle light': {
-                    target: 'Yellow',
+                  "toggle light": {
+                    target: "Yellow",
                     reenter: false,
                   },
                 },
               },
               Yellow: {
                 entry: {
-                  type: 'setYellow',
+                  type: "setYellow",
                 },
                 on: {
-                  'toggle light': {
-                    target: 'Blue',
+                  "toggle light": {
+                    target: "Blue",
                     reenter: false,
                   },
                 },
               },
               Blue: {
                 entry: {
-                  type: 'setBlue',
+                  type: "setBlue",
                 },
                 on: {
-                  'toggle light': {
-                    target: 'Green',
+                  "toggle light": {
+                    target: "Green",
                     reenter: false,
                   },
                 },
               },
               Green: {
                 entry: {
-                  type: 'setGreen',
+                  type: "setGreen",
                 },
                 on: {
-                  'toggle light': {
-                    target: 'Light off',
+                  "toggle light": {
+                    target: "Light off",
                     reenter: false,
                   },
                 },
@@ -131,11 +131,11 @@ export const machine = createMachine(
           },
           Volume: {
             on: {
-              'volume up': {
-                guard: 'isNotMaxVolume',
+              "volume up": {
+                guard: "isNotMaxVolume",
                 actions: [
                   {
-                    type: 'volUp',
+                    type: "volUp",
                   },
                   assign({
                     volume: (event) => {
@@ -145,11 +145,11 @@ export const machine = createMachine(
                 ],
                 reenter: true,
               },
-              'volume down': {
-                guard: 'isNotMinVolume',
+              "volume down": {
+                guard: "isNotMinVolume",
                 actions: [
                   {
-                    type: 'volDown',
+                    type: "volDown",
                   },
                   assign({
                     volume: (event) => {
@@ -163,12 +163,12 @@ export const machine = createMachine(
           },
         },
         on: {
-          'toggle power': {
-            target: 'Power off',
+          "toggle power": {
+            target: "Power off",
             reenter: false,
           },
         },
-        type: 'parallel',
+        type: "parallel",
       },
     },
   },

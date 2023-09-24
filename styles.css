@@ -46,7 +46,7 @@ a {
   text-decoration-skip-ink: auto;
   text-underline-offset: 0.15em;
   text-decoration-thickness: 0.06em;
-  font-variation-settings: 'wght' 600;
+  font-variation-settings: "wght" 600;
 }
 
 /* Make media easier to work with */
@@ -443,7 +443,7 @@ body:has(#noise-maker.blue):after {
   animation: animate-gradient 60s ease infinite;
   background: var(--gradient-radial);
   background-size: 800% 800%;
-  content: '';
+  content: "";
   display: block;
   height: 100%;
   opacity: 0.5;
@@ -461,7 +461,7 @@ body:has(#noise-maker.blue):after {
   background: var(--gradient-radial);
   background-size: 800% 800%;
   border-radius: 50%;
-  content: '';
+  content: "";
   display: block;
   height: 100%;
   opacity: 0.5;

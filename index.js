@@ -1,5 +1,5 @@
-import { createActor, fromCallback } from 'xstate';
-import { machine } from './machine';
+import { createActor, fromCallback } from "xstate";
+import { machine } from "./machine";
 import {
   iconPower,
   iconBulbOn,
@@ -10,10 +10,10 @@ import {
   iconVolumeHigh,
   iconVolumeLow,
   iconTimer,
-} from './icons.js';
-import './styles.css';
+} from "./icons.js";
+import "./styles.css";
 
-document.querySelector('#app').innerHTML = `
+document.querySelector("#app").innerHTML = `
 <h1>White noise machine</h1>
 <div id="info">
   <h2 class="state-list-label">State(s):</h2>
@@ -55,19 +55,19 @@ document.querySelector('#app').innerHTML = `
 </audio>
 `;
 
-const audio = document.querySelector('#audio-player');
-const powerButton = document.querySelector('#button-power');
-const lightButton = document.querySelector('#button-light');
-const soundButton = document.querySelector('#button-sound');
-const volUpButton = document.querySelector('#button-vol-up');
-const volDownButton = document.querySelector('#button-vol-down');
+const audio = document.querySelector("#audio-player");
+const powerButton = document.querySelector("#button-power");
+const lightButton = document.querySelector("#button-light");
+const soundButton = document.querySelector("#button-sound");
+const volUpButton = document.querySelector("#button-vol-up");
+const volDownButton = document.querySelector("#button-vol-down");
 
 const noiseTrack =
-  'https://ascelcgzufjyvdzuplwo.supabase.co/storage/v1/object/public/demo-assets/laura/noise.mp3';
+  "https://ascelcgzufjyvdzuplwo.supabase.co/storage/v1/object/public/demo-assets/laura/noise.mp3";
 const wavesTrack =
-  'https://ascelcgzufjyvdzuplwo.supabase.co/storage/v1/object/public/demo-assets/laura/waves.mp3';
+  "https://ascelcgzufjyvdzuplwo.supabase.co/storage/v1/object/public/demo-assets/laura/waves.mp3";
 const fanTrack =
-  'https://ascelcgzufjyvdzuplwo.supabase.co/storage/v1/object/public/demo-assets/laura/fan.mp3';
+  "https://ascelcgzufjyvdzuplwo.supabase.co/storage/v1/object/public/demo-assets/laura/fan.mp3";
 
 const minVolume = 1;
 const maxVolume = 10;
@@ -80,18 +80,18 @@ function convertVolume(volume) {
 // Disable buttons
 
 function disableButtons() {
-  lightButton.setAttribute('disabled', 'disabled');
-  soundButton.setAttribute('disabled', 'disabled');
-  volUpButton.setAttribute('disabled', 'disabled');
-  volDownButton.setAttribute('disabled', 'disabled');
+  lightButton.setAttribute("disabled", "disabled");
+  soundButton.setAttribute("disabled", "disabled");
+  volUpButton.setAttribute("disabled", "disabled");
+  volDownButton.setAttribute("disabled", "disabled");
   getIcons();
 }
 
 function enableButtons() {
-  lightButton.removeAttribute('disabled');
-  soundButton.removeAttribute('disabled');
-  volUpButton.removeAttribute('disabled');
-  volDownButton.removeAttribute('disabled');
+  lightButton.removeAttribute("disabled");
+  soundButton.removeAttribute("disabled");
+  volUpButton.removeAttribute("disabled");
+  volDownButton.removeAttribute("disabled");
   getIcons();
 }
 
@@ -99,7 +99,7 @@ function enableButtons() {
 
 function lightIcon(state) {
   const lightOff = state.matches({
-    Light: 'Light off',
+    Light: "Light off",
   });
   if (lightOff === true) {
     lightButton.innerHTML = iconBulbOff;
@@ -110,11 +110,11 @@ function lightIcon(state) {
 
 function soundIcon(sound) {
   const soundTrack = sound;
-  if (soundTrack === 'noise') {
+  if (soundTrack === "noise") {
     soundButton.innerHTML = iconNoise;
-  } else if (soundTrack === 'waves') {
+  } else if (soundTrack === "waves") {
     soundButton.innerHTML = iconWaves;
-  } else if (soundTrack === 'fan') {
+  } else if (soundTrack === "fan") {
     soundButton.innerHTML = iconFan;
   }
 }
@@ -130,21 +130,21 @@ function updateIcons(state) {
 }
 
 function setLightColour(colour) {
-  if (colour === 'none') {
-    document.querySelector('#noise-maker').className = '';
+  if (colour === "none") {
+    document.querySelector("#noise-maker").className = "";
   } else {
-    document.querySelector('#noise-maker').className = colour;
+    document.querySelector("#noise-maker").className = colour;
   }
 }
 
 function updateSource(noiseTrack) {
-  const existingSource = document.querySelector('source');
+  const existingSource = document.querySelector("source");
   if (existingSource != null) {
     existingSource.remove();
   }
   let source;
-  source = document.createElement('source');
-  source.type = 'audio/mpeg';
+  source = document.createElement("source");
+  source.type = "audio/mpeg";
   source.src = noiseTrack;
   audio.prepend(source);
 }
@@ -152,13 +152,13 @@ function updateSource(noiseTrack) {
 function changeTrack(soundTrack) {
   const sound = soundTrack;
 
-  if (sound === 'noise') {
+  if (sound === "noise") {
     updateSource(noiseTrack);
     soundIcon(sound);
-  } else if (sound === 'waves') {
+  } else if (sound === "waves") {
     updateSource(wavesTrack);
     soundIcon(sound);
-  } else if (sound === 'fan') {
+  } else if (sound === "fan") {
     updateSource(fanTrack);
     soundIcon(sound);
   }
@@ -167,18 +167,18 @@ function changeTrack(soundTrack) {
 function updateDisplayedStates(state) {
   const stateAsList = stateToList(state);
   // Display current state
-  document.querySelector('[data-states]').replaceWith(stateAsList);
+  document.querySelector("[data-states]").replaceWith(stateAsList);
 }
 
 function stateToList(state) {
   const stateArray = state.configuration
-    .filter((s) => s.type === 'atomic' || s.type === 'final')
+    .filter((s) => s.type === "atomic" || s.type === "final")
     .map((s) => s.id);
-  const list = document.createElement('ul');
-  list.setAttribute('data-states', '');
+  const list = document.createElement("ul");
+  list.setAttribute("data-states", "");
   stateArray.forEach(function (item) {
-    const listItem = document.createElement('li');
-    listItem.textContent = item.replaceAll('.', ' → ');
+    const listItem = document.createElement("li");
+    listItem.textContent = item.replaceAll(".", " → ");
     list.append(listItem);
   });
   return list;
@@ -186,10 +186,10 @@ function stateToList(state) {
 
 function contextToList(state) {
   const contextArray = Object.entries(state.context);
-  const contextList = document.createElement('ul');
-  contextList.setAttribute('data-context', '');
+  const contextList = document.createElement("ul");
+  contextList.setAttribute("data-context", "");
   contextArray.forEach(function (item) {
-    const contextItem = document.createElement('li');
+    const contextItem = document.createElement("li");
     contextItem.textContent = item[0] + `: ` + item[1];
     contextList.append(contextItem);
   });
@@ -199,7 +199,7 @@ function contextToList(state) {
 function updateDisplayedContext(state) {
   const contextAsList = contextToList(state);
   // Display current state
-  document.querySelector('[data-context]').replaceWith(contextAsList);
+  document.querySelector("[data-context]").replaceWith(contextAsList);
 }
 
 const noiseMaker = createActor(
@@ -216,31 +216,31 @@ const noiseMaker = createActor(
         disableButtons();
       },
       removeColour: ({ context, event }) => {
-        const colour = 'none';
+        const colour = "none";
         setLightColour(colour);
       },
       setYellow: ({ context, event }) => {
-        const colour = 'yellow';
+        const colour = "yellow";
         setLightColour(colour);
       },
       setBlue: ({ context, event }) => {
-        const colour = 'blue';
+        const colour = "blue";
         setLightColour(colour);
       },
       setGreen: ({ context, event }) => {
-        const colour = 'green';
+        const colour = "green";
         setLightColour(colour);
       },
       changeToNoise: ({ context, event }) => {
-        const soundTrack = 'noise';
+        const soundTrack = "noise";
         changeTrack(soundTrack);
       },
       changeToWaves: ({ context, event }) => {
-        const soundTrack = 'waves';
+        const soundTrack = "waves";
         changeTrack(soundTrack);
       },
       changeToFan: ({ context, event }) => {
-        const soundTrack = 'fan';
+        const soundTrack = "fan";
         changeTrack(soundTrack);
       },
       volUp: ({ context }) => {
@@ -254,13 +254,13 @@ const noiseMaker = createActor(
     },
     actors: {
       audioPlayer: fromCallback(({ receive }) => {
-        let playStatus = 'paused';
+        let playStatus = "paused";
         receive((event) => {
-          if (event.type === 'play') {
-            playStatus = 'playing';
+          if (event.type === "play") {
+            playStatus = "playing";
             audio.play();
-          } else if (event.type === 'pause') {
-            playStatus = 'paused';
+          } else if (event.type === "pause") {
+            playStatus = "paused";
             audio.pause();
           }
         });
@@ -285,22 +285,22 @@ noiseMaker.subscribe((state) => {
 
 noiseMaker.start();
 
-powerButton?.addEventListener('click', () => {
-  noiseMaker.send({ type: 'toggle power' });
+powerButton?.addEventListener("click", () => {
+  noiseMaker.send({ type: "toggle power" });
 });
 
-lightButton?.addEventListener('click', () => {
-  noiseMaker.send({ type: 'toggle light' });
+lightButton?.addEventListener("click", () => {
+  noiseMaker.send({ type: "toggle light" });
 });
 
-soundButton?.addEventListener('click', () => {
-  noiseMaker.send({ type: 'toggle sound' });
+soundButton?.addEventListener("click", () => {
+  noiseMaker.send({ type: "toggle sound" });
 });
 
-volUpButton?.addEventListener('click', () => {
-  noiseMaker.send({ type: 'volume up' });
+volUpButton?.addEventListener("click", () => {
+  noiseMaker.send({ type: "volume up" });
 });
 
-volDownButton?.addEventListener('click', () => {
-  noiseMaker.send({ type: 'volume down' });
+volDownButton?.addEventListener("click", () => {
+  noiseMaker.send({ type: "volume down" });
 });
