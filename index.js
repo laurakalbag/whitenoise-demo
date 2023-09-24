@@ -61,9 +61,9 @@ const soundButton = document.querySelector("#button-sound");
 const volUpButton = document.querySelector("#button-vol-up");
 const volDownButton = document.querySelector("#button-vol-down");
 
-const noiseTrack = "noise2.mp3";
-const wavesTrack = "waves2.mp3";
-const fanTrack = "fan2.mp3";
+const noiseTrack = "noise.mp3";
+const wavesTrack = "waves.mp3";
+const fanTrack = "fan.mp3";
 
 const minVolume = 1;
 const maxVolume = 10;
