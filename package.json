@@ -5,5 +5,13 @@
   "dependencies": {
     "xstate": "5.0.0-beta.29",
     "vite": "4.4.9"
+  },
+  "devDependencies": {
+    "vite": "latest"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "serve": "vite preview"
   }
 }
