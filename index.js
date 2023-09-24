@@ -9,7 +9,6 @@ import {
   iconNoise,
   iconVolumeHigh,
   iconVolumeLow,
-  iconTimer,
 } from "./icons.js";
 import "./styles.css";
 
@@ -134,7 +133,7 @@ function setLightColour(colour) {
   }
 }
 
-function updateSource(noiseTrack) {
+function updateSource(soundTrack) {
   const existingSource = document.querySelector("source");
   if (existingSource != null) {
     existingSource.remove();
@@ -142,7 +141,7 @@ function updateSource(noiseTrack) {
   let source;
   source = document.createElement("source");
   source.type = "audio/mpeg";
-  source.src = noiseTrack;
+  source.src = soundTrack;
   audio.prepend(source);
 }
 
