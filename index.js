@@ -75,7 +75,6 @@ function convertVolume(volume) {
 }
 
 // Disable buttons
-
 function disableButtons() {
   lightButton.setAttribute("disabled", "disabled");
   soundButton.setAttribute("disabled", "disabled");
@@ -93,7 +92,6 @@ function enableButtons() {
 }
 
 // Icons
-
 function lightIcon(state) {
   const lightOff = state.matches({
     Light: "Light off",
