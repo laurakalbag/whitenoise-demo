@@ -151,11 +151,7 @@ export const machine = createMachine(
                   {
                     type: "volDown",
                   },
-                  assign({
-                    volume: (event) => {
-                      return event.context.volume - 1;
-                    },
-                  }),
+                  "inline:White noise machine.Power on.Volume#volume down[-1]#transition[1]",
                 ],
                 reenter: true,
               },
